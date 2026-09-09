@@ -247,13 +247,16 @@ function propsTile(propsW) {
   const span = s => s.reduce((a, x, i) => a + x[1] + (i < s.length - 1 ? gapAt(i) : 0), 0);
   while (seq.length > 2 && span(seq) > propsW - margin * 2) seq.pop();
   let cur = margin;
-  const objs = seq.map(([fn, w], i) => {
+  const packed = seq.map(([fn, w], i) => {
     const cx = cur + w / 2;
     cur += w + (i < seq.length - 1 ? gapAt(i) : 0);
     return fn(n(cx));
-  }).join('\n    ');
+  });
+  // 맨 오른쪽 남는 자리에 가스등 (앞 소품과 안 겹치게)
+  const lampX = clamp(propsW - 46, cur + 46, propsW - 30);
+  const objs = [...packed, gasLamp(n(lampX), y)].join('\n    ');
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n(TW)} ${VB_H}" width="${n(TW)}" height="${VB_H}" role="img" aria-label="항아리·플라스크·유리병이 놓인 선반">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n(TW)} ${VB_H}" width="${n(TW)}" height="${VB_H}" role="img" aria-label="항아리·플라스크·유리병·가스등이 놓인 선반">
   <defs>
     ${wig('jf', seed, 3.2, 0.022, 0.44)}
     ${wig('jo', seed ^ 0x9e37, 4, 0.03, 0.42)}
