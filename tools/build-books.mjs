@@ -14,8 +14,7 @@ mkdirSync(OUT, { recursive: true });
 
 const cfg = JSON.parse(readFileSync(join(ROOT, 'tools', 'books.config.json'), 'utf8'));
 const R = cfg.render ?? {};
-const IMG_H = R.spineHeight ?? 240;
-const CASE_W = R.caseWidth ?? 760;
+const CASE_W = R.caseWidth ?? 900;   // 비율 기준 폭 (실제 렌더 폭은 화면 폭의 100%)
 const ROT = (R.titleDirection ?? 'down') === 'up' ? -90 : 90;
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -25,10 +24,10 @@ function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0)
 function rng(seed) { let s = seed >>> 0; return () => { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 2 ** 32; }; }
 
 // --- 케이스 치수 ---
-const VB_H = 232;
+const VB_H = 222;
 const CASE_TOP = 4;
 const RAIL_H = 13;
-const SHELF_TOP = 204;                 // 물건이 놓이는 선
+const SHELF_TOP = 196;                 // 물건이 놓이는 선
 const SHELF_FRONT = 18;
 const INTERIOR = SHELF_TOP - (CASE_TOP + RAIL_H);   // 책이 들어갈 세로 여유
 const BASE_Y = SHELF_TOP + SHELF_FRONT; // 230
@@ -102,6 +101,7 @@ function titleText(title, cx, mid, run, fs0) {
 function bookArt(book, i, x0) {
   const seed = hash(book.slug);
   const rand = rng(seed);
+  const spare = !book.url;                     // url 없으면 예비 책 (제목·링크 없음)
   const cover = book.cover || BROWN[i % BROWN.length];
   const style = book.style || STYLES[i % STYLES.length];
   const title = (book.title || book.slug).toUpperCase();
@@ -109,7 +109,7 @@ function bookArt(book, i, x0) {
   const y0 = SHELF_TOP - H;
   const bx = x0 + BOOK_INSET;
   const cx = bx + BOOK_W / 2;
-  const tilt = book.tilt ?? n(rand() * 1.4 - 0.7, 2);
+  const tilt = book.tilt ?? (spare ? 0 : n(rand() * 1.4 - 0.7, 2));
   const run = H - 24;                         // 제목이 쓰일 세로 길이
 
   const g = [];
@@ -118,7 +118,11 @@ function bookArt(book, i, x0) {
   g.push(`<rect x="${n(bx)}" y="${n(y0)}" width="${BOOK_W}" height="2.6" fill="#000000" opacity="0.32"/>`);
   const band = yy => `<rect x="${n(bx - 1)}" y="${n(yy - 2)}" width="${BOOK_W + 2}" height="4" fill="#000000" opacity="0.28"/><rect x="${n(bx - 1)}" y="${n(yy - 2)}" width="${BOOK_W + 2}" height="1.1" fill="#ffffff" opacity="0.11"/>`;
 
-  if (style === 'banded') {
+  if (spare) {
+    // 제목 없는 갈색 책등 (나중에 사이트 추가 시 이 항목에 title·url 채우면 활성화)
+    g.push(band(y0 + 15));
+    g.push(band(n(SHELF_TOP - 17)));
+  } else if (style === 'banded') {
     const ys = [y0 + 16, y0 + H * 0.5, y0 + H - 18];
     g.push(ys.map(band).join(''));
     g.push(titleText(title, cx, y0 + H * 0.5, H * 0.5 - 22));
@@ -220,14 +224,14 @@ function candlestick(x, y) {
       <path d="M0 -80 q-1.4 -2.6 0 -6 q1.4 3 0 6z" fill="#fff0c8"/>
     </g>`;
 }
-
+// 예비 책 (제목 없는 갈색 책등, 나중에 사이트 추가용 자리)
 function propsTile(propsW) {
   const TW = propsW + SIDE_W;
   const L = -BL, Rr = TW + BL;
   const seed = hash('props');
   const y = SHELF_TOP - 2;
 
-  // 왼→오 순서대로 [함수, 폭] · 사이 간격은 남는 폭을 weight 로 분배 → 항상 겹치지 않고 꽉 참
+  // 왼→오 순서대로 [함수, 폭] : 항아리·플라스크·촛대·유리병
   const seq = [
     [x => jar(x, y), 66],
     [x => erlenmeyer(x, y, 78), 40],
@@ -237,15 +241,15 @@ function propsTile(propsW) {
     [x => bottle(x, y, 90, '#c9c6b2', '#2c1810'), 28],
     [x => bottle(x, y, 52, '#c6c3b0', '#2a1a12'), 26],
   ];
-  const gapWeight = [1.1, 0.8, 1.6, 0.55, 1.5, 0.7];   // seq.length-1 개
-  const margin = 4;
-  const objW = seq.reduce((a, s) => a + s[1], 0);
-  const free = Math.max(0, propsW - margin * 2 - objW);
-  const gwSum = gapWeight.reduce((a, b) => a + b, 0);
+  const margin = 10;
+  const gapAt = i => [26, 16, 30, 16, 28, 16][i] ?? 22;
+  // 소품을 왼쪽부터 고정 간격으로 붙이고, 남는 폭이 부족하면 뒤쪽 유리병부터 버린다
+  const span = s => s.reduce((a, x, i) => a + x[1] + (i < s.length - 1 ? gapAt(i) : 0), 0);
+  while (seq.length > 2 && span(seq) > propsW - margin * 2) seq.pop();
   let cur = margin;
   const objs = seq.map(([fn, w], i) => {
     const cx = cur + w / 2;
-    cur += w + (i < gapWeight.length ? free * gapWeight[i] / gwSum : 0);
+    cur += w + (i < seq.length - 1 ? gapAt(i) : 0);
     return fn(n(cx));
   }).join('\n    ');
 
@@ -283,7 +287,8 @@ function bookTile(book, i, isFirst) {
   const PL = isFirst ? SIDE_W : 0;
   const TW = INNER_W + PL;
   const L = -BL, Rr = TW + BL;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TW} ${VB_H}" width="${TW}" height="${VB_H}" role="img" aria-label="${esc((book.title || book.slug))}">
+  const label = book.url ? esc(book.title || book.slug) : '예비 책';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TW} ${VB_H}" width="${TW}" height="${VB_H}" role="img" aria-label="${label}">
   <defs>
     ${wig('jf', seed, 3, 0.022, 0.44)}
     ${wig('jb', seed ^ 0x5bd1, 4.2, 0.028, 0.42)}
@@ -312,23 +317,33 @@ for (const f of ['_shelf.svg', '_props.svg']) if (existsSync(join(OUT, f))) rmSy
 books.forEach((b, i) => writeFileSync(join(OUT, `${b.slug}.svg`), bookTile(b, i, i === 0)));
 
 const booksW = SIDE_W + books.length * INNER_W;
-const propsW = Math.max(160, CASE_W - booksW - SIDE_W);
+const propsW = Math.max(200, CASE_W - booksW - SIDE_W);
 writeFileSync(join(OUT, '_props.svg'), propsTile(propsW));
 
-const cap = R.caption ? `\n<div align="center"><sub>${esc(R.caption)}</sub></div>\n` : '';
-const rows = books.map(b => `<a href="${esc(b.url)}"><img src="assets/books/${b.slug}.svg" height="${IMG_H}"></a>`).join('')
-  + `<img src="assets/books/_props.svg" height="${IMG_H}">`;
+// 각 조각을 폭 % 로 붙여 한 줄 유지 → 화면 좁아지면 줄바꿈 대신 통째로 축소.
+// 합계가 scene(width 100%) 과 같아지도록 total = 케이스 전체 폭.
+const tiles = books.map((b, i) => ({ href: b.url, src: `assets/books/${b.slug}.svg`, tw: (i === 0 ? SIDE_W : 0) + INNER_W }));
+tiles.push({ src: 'assets/books/_props.svg', tw: propsW + SIDE_W });
+const total = tiles.reduce((a, t) => a + t.tw, 0);
+const rows = tiles.map(t => {
+  const img = `<img src="${t.src}" width="${n(t.tw / total * 99.8, 3)}%">`;
+  return t.href ? `<a href="${esc(t.href)}">${img}</a>` : img;
+}).join('');
+
+const cap = R.caption ? `<div align="center"><sub>${esc(R.caption)}</sub></div>\n\n` : '';
 const block =
-`<!-- books:start -->${cap}
-<div align="center">
+`<!-- books:start -->
+${cap}<p align="center">
 ${rows}
-</div>
+</p>
 <!-- books:end -->`;
 
 const readmePath = join(ROOT, 'README.md');
 let md = readFileSync(readmePath, 'utf8');
+// scene 이미지도 width 100% 로 (케이스와 가로 길이 항상 동일)
+md = md.replace(/(<img\s+src="assets\/scene\.svg"[^>]*?)\s*width="[^"]*"([^>]*>)/, '$1 width="100%"$2');
 const re = /<!-- books:start -->[\s\S]*?<!-- books:end -->/;
 md = re.test(md) ? md.replace(re, block) : md.trimEnd() + `\n\n${block}\n`;
 writeFileSync(readmePath, md);
 
-console.log(`generated ${books.length} book tiles + _props.svg (case ${CASE_W}px), README updated`);
+console.log(`generated ${books.length} book tiles + _props.svg (total ${total}px ref), README updated`);

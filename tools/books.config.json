@@ -1,8 +1,7 @@
 {
-  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 의 <!-- books:start --> ~ <!-- books:end --> 블록을 갱신한다.",
+  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 블록을 갱신한다. url 없는 항목 = 예비 책(제목·링크 없음). 새 사이트 생기면 그 항목에 title·url·style 채우고 다시 실행.",
   "render": {
-    "spineHeight": 232,
-    "caseWidth": 640,
+    "caseWidth": 900,
     "titleDirection": "down",
     "caption": ""
   },
@@ -30,6 +29,10 @@
       "cover": "#33261a",
       "style": "ruled",
       "height": 174
-    }
+    },
+    { "slug": "spare-1", "cover": "#4a3122", "height": 182 },
+    { "slug": "spare-2", "cover": "#5a3826", "height": 150 },
+    { "slug": "spare-3", "cover": "#3a2a1c", "height": 190 },
+    { "slug": "spare-4", "cover": "#43301f", "height": 138 }
   ]
 }
