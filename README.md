@@ -10,6 +10,6 @@
 
 <!-- books:start -->
 <div align="center">
-<a href="https://nuclyee72.github.io/DailySudoku/"><img src="assets/books/dailysudoku.svg" height="232"></a><a href="https://nuclyee72.github.io/Gagedo/"><img src="assets/books/gagedo.svg" height="232"></a><a href="https://github.com/nuclyee72/mahjong_rating_site"><img src="assets/books/mahjongrating.svg" height="232"></a>
+<a href="https://nuclyee72.github.io/DailySudoku/"><img src="assets/books/dailysudoku.svg" height="232"></a><a href="https://nuclyee72.github.io/Gagedo/"><img src="assets/books/gagedo.svg" height="232"></a><a href="https://github.com/nuclyee72/mahjong_rating_site"><img src="assets/books/mahjongrating.svg" height="232"></a><img src="assets/books/_props.svg" height="232">
 </div>
 <!-- books:end -->

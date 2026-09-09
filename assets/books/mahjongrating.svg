@@ -1,60 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57 232" width="57" height="232" role="img" aria-label="MAHJONG RATING">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 232" width="52" height="232" role="img" aria-label="MAHJONG RATING">
   <defs>
-    <filter id="j" x="-32%" y="-6%" width="164%" height="112%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="8" result="n">
-        <animate attributeName="seed" values="8;1;-3;-1" dur="0.5s" calcMode="discrete" repeatCount="indefinite"/>
+    <filter id="jf" x="-28%" y="-14%" width="156%" height="128%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="8" result="n">
+        <animate attributeName="seed" values="8;1;-5;-10" dur="0.44s" calcMode="discrete" repeatCount="indefinite"/>
       </feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <filter id="js" x="-22%" y="-40%" width="144%" height="180%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.05" numOctaves="2" seed="1" result="n">
-        <animate attributeName="seed" values="1;-1;13;-3" dur="0.5s" calcMode="discrete" repeatCount="indefinite"/>
+    <filter id="jb" x="-28%" y="-14%" width="156%" height="128%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="-6" result="n">
+        <animate attributeName="seed" values="-6;-8;2;-5" dur="0.42s" calcMode="discrete" repeatCount="indefinite"/>
       </feTurbulence>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4.2" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
     <linearGradient id="lit" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.09"/>
       <stop offset="0.16" stop-color="#ffffff" stop-opacity="0"/>
-      <stop offset="0.80" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000000" stop-opacity="0.30"/>
+      <stop offset="0.82" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.32"/>
     </linearGradient>
   </defs>
-
-  <!-- 책 -->
-  <g filter="url(#j)" transform="rotate(0.68 28.5 202)">
-    <rect x="50.5" y="-4" width="3" height="202" fill="#b3a884"/>
-    <g stroke="#82785f" stroke-width="0.5" opacity="0.4" fill="none">
-      <path d="M51 11.32 h2.4"/>
-      <path d="M51 25.95 h2.4"/>
-      <path d="M51 19.12 h2.4"/>
-    </g>
-    <rect x="5" y="-8" width="47" height="210" rx="2.2" fill="#4a1e1e" stroke="#160d08" stroke-width="1.4"/>
-    <rect x="5" y="-8" width="47" height="210" rx="2.2" fill="url(#lit)"/>
-    <g stroke="#000000" stroke-width="0.8" opacity="0.13" fill="none">
-      <path d="M33.43 1.16 V196.25"/>
-      <path d="M31.34 -0.03 V192.32"/>
-      <path d="M18.5 2.01 V192.85"/>
-    </g>
-    <rect x="4" y="3.7" width="49" height="4.6" fill="#000000" opacity="0.30"/><rect x="4" y="3.7" width="49" height="1.2" fill="#ffffff" opacity="0.13"/>
-    <rect x="4" y="33" width="49" height="4.6" fill="#000000" opacity="0.30"/><rect x="4" y="33" width="49" height="1.2" fill="#ffffff" opacity="0.13"/>
-    <rect x="4" y="131.2" width="49" height="4.6" fill="#000000" opacity="0.30"/><rect x="4" y="131.2" width="49" height="1.2" fill="#ffffff" opacity="0.13"/>
-    <rect x="4" y="186.7" width="49" height="4.6" fill="#000000" opacity="0.30"/><rect x="4" y="186.7" width="49" height="1.2" fill="#ffffff" opacity="0.13"/>
-    <rect x="9" y="40.3" width="39" height="88.2" fill="none" stroke="#caa63a" stroke-width="1" opacity="0.85"/>
-    <rect x="11" y="42.7" width="35" height="83.4" fill="none" stroke="#caa63a" stroke-width="0.5" opacity="0.5"/>
-    <text transform="translate(35.1 87.7) rotate(90)" text-anchor="middle" dominant-baseline="central"
-      font-family="Georgia, 'Times New Roman', 'Nanum Myeongjo', serif" font-weight="600" font-size="11" letter-spacing="0.6" fill="#ecd28a">MAHJONG</text>
-    <text transform="translate(21.9 87.7) rotate(90)" text-anchor="middle" dominant-baseline="central"
-      font-family="Georgia, 'Times New Roman', 'Nanum Myeongjo', serif" font-weight="600" font-size="11" letter-spacing="0.6" fill="#ecd28a">RATING</text>
-    <rect x="5" y="-8" width="47" height="3" rx="1.4" fill="#000000" opacity="0.34"/>
-    <rect x="5" y="199" width="47" height="3" rx="1.4" fill="#000000" opacity="0.42"/>
+  <g filter="url(#jf)"><rect x="-12" y="4" width="76" height="218" fill="#1d120b"/>
+    <rect x="-12" y="4" width="76" height="13" fill="#000000" opacity="0.4"/>
+    <rect x="-12" y="206" width="76" height="16" fill="#000000" opacity="0.28"/></g>
+  <g filter="url(#jb)">
+    <g transform="rotate(0.52 26 204)">
+    <rect x="3" y="30" width="46" height="174" rx="2" fill="#33261a" stroke="#160d08" stroke-width="1.4"/>
+    <rect x="3" y="30" width="46" height="174" rx="2" fill="url(#lit)"/>
+    <rect x="3" y="30" width="46" height="2.6" fill="#000000" opacity="0.32"/>
+    <rect x="8" y="61.32" width="36" height="90.48" fill="none" stroke="#caa63a" stroke-width="1" opacity="0.8"/>
+    <rect x="2" y="42" width="48" height="4" fill="#000000" opacity="0.28"/><rect x="2" y="42" width="48" height="1.1" fill="#ffffff" opacity="0.11"/>
+    <text transform="translate(32.25 109.71) rotate(90)" text-anchor="middle" dominant-baseline="central"
+      font-family="Georgia,'Times New Roman','Nanum Myeongjo',serif" font-weight="600" font-size="10.5" letter-spacing="0.5" fill="#e8c88a">MAHJONG</text>
+    <text transform="translate(19.75 109.71) rotate(90)" text-anchor="middle" dominant-baseline="central"
+      font-family="Georgia,'Times New Roman','Nanum Myeongjo',serif" font-weight="600" font-size="10.5" letter-spacing="0.5" fill="#e8c88a">RATING</text>
+    <path d="M35.41 38 V196" stroke="#000000" stroke-width="0.7" opacity="0.12" fill="none"/>
   </g>
-
-  <!-- 선반 조각 (좌우로 넘치게 그려 이웃 타일과 이어짐) -->
-  <g filter="url(#js)">
-    <path d="M-9 222 H66 L57 232 H0 Z" fill="#160d08" opacity="0.5"/>
-    <rect x="-9" y="202" width="75" height="18" fill="#2c1c0f"/>
-    <rect x="-9" y="202" width="75" height="2.6" fill="#4a3422" opacity="0.6"/>
-    <rect x="-9" y="214" width="75" height="4" fill="#000000" opacity="0.24"/>
-    <path d="M-9 220.5 H66" stroke="#0c0603" stroke-width="1.6" opacity="0.75"/>
+  </g>
+  <g filter="url(#jf)">
+    <rect x="-12" y="4" width="76" height="13" fill="#2c1c0f"/>
+    <rect x="-12" y="4" width="76" height="2.4" fill="#4a3422" opacity="0.5"/>
+    <rect x="-12" y="14" width="76" height="3" fill="#000000" opacity="0.28"/>
+    <path d="M-12 16.5 H64" stroke="#0c0603" stroke-width="1.3" opacity="0.7"/>
+    <path d="M-12 222 H64 L49 229 H3 Z" fill="#140b06" opacity="0.32"/>
+    <rect x="-12" y="204" width="76" height="18" fill="#2c1c0f"/>
+    <rect x="-12" y="204" width="76" height="2.6" fill="#4a3422" opacity="0.6"/>
+    <rect x="-12" y="217" width="76" height="4" fill="#000000" opacity="0.24"/>
+    <path d="M-12 221.5 H64" stroke="#0c0603" stroke-width="1.6" opacity="0.75"/>
   </g>
 </svg>

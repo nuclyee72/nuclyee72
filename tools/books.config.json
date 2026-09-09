@@ -2,6 +2,7 @@
   "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 의 <!-- books:start --> ~ <!-- books:end --> 블록을 갱신한다.",
   "render": {
     "spineHeight": 232,
+    "caseWidth": 640,
     "titleDirection": "down",
     "caption": ""
   },
@@ -10,19 +11,25 @@
       "slug": "dailysudoku",
       "title": "DAILY SUDOKU",
       "url": "https://nuclyee72.github.io/DailySudoku/",
-      "cover": "#26313f"
+      "cover": "#4a3122",
+      "style": "banded",
+      "height": 190
     },
     {
       "slug": "gagedo",
       "title": "GAGEDO",
       "url": "https://nuclyee72.github.io/Gagedo/",
-      "cover": "#2e3b2b"
+      "cover": "#5a3826",
+      "style": "label",
+      "height": 156
     },
     {
       "slug": "mahjongrating",
       "title": "MAHJONG RATING",
       "url": "https://github.com/nuclyee72/mahjong_rating_site",
-      "cover": "#4a1e1e"
+      "cover": "#33261a",
+      "style": "ruled",
+      "height": 174
     }
   ]
 }
