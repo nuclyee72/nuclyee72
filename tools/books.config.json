@@ -30,7 +30,14 @@
       "style": "ruled",
       "height": 174
     },
-    { "slug": "spare-1", "cover": "#4a3122", "height": 182 },
+    {
+      "slug": "dailytrilateral",
+      "title": "DAILY TRILATERAL",
+      "url": "https://nuclyee72.github.io/DailyTrilateral/",
+      "cover": "#2f2318",
+      "style": "plain",
+      "height": 182
+    },
     { "slug": "spare-2", "cover": "#5a3826", "height": 150 },
     { "slug": "spare-3", "cover": "#3a2a1c", "height": 190 },
     { "slug": "spare-4", "cover": "#43301f", "height": 138 }
