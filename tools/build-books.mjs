@@ -105,7 +105,7 @@ function bookArt(book, i, x0) {
   const cover = book.cover || BROWN[i % BROWN.length];
   const style = book.style || STYLES[i % STYLES.length];
   const title = (book.title || book.slug).toUpperCase();
-  const H = clamp(book.height ?? Math.round(150 + rand() * 40), 120, INTERIOR - 2);
+  const H = clamp(book.height ?? R.bookHeight ?? Math.round(150 + rand() * 40), 120, INTERIOR - 2);   // 기본은 전부 같은 높이
   const y0 = SHELF_TOP - H;
   const bx = x0 + BOOK_INSET;
   const cx = bx + BOOK_W / 2;

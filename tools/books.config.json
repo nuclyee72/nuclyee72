@@ -3,7 +3,8 @@
   "render": {
     "caseWidth": 900,
     "titleDirection": "down",
-    "caption": ""
+    "caption": "",
+    "bookHeight": 172
   },
   "books": [
     {
@@ -11,32 +12,28 @@
       "title": "PROJECT DAILY",
       "url": "https://nuclyee72.github.io/ProjectDaily/",
       "cover": "#5a3826",
-      "style": "label",
-      "height": 176
+      "style": "label"
     },
     {
       "slug": "dailysudoku",
       "title": "DAILY SUDOKU",
       "url": "https://nuclyee72.github.io/DailySudoku/",
       "cover": "#4a3122",
-      "style": "banded",
-      "height": 166
+      "style": "banded"
     },
     {
       "slug": "dailytrilateral",
       "title": "DAILY TRILATERAL",
       "url": "https://nuclyee72.github.io/DailyTrilateral/",
       "cover": "#2f2318",
-      "style": "plain",
-      "height": 172
+      "style": "plain"
     },
     {
       "slug": "dailywordship",
       "title": "DAILY WORDSHIP",
       "url": "https://nuclyee72.github.io/DailyWordship/",
       "cover": "#43301f",
-      "style": "ruled",
-      "height": 160
+      "style": "ruled"
     },
     {
       "slug": "gap-1",
@@ -47,16 +44,14 @@
       "title": "MAHJONG RATING",
       "url": "https://github.com/nuclyee72/mahjong_rating_site",
       "cover": "#33261a",
-      "style": "ruled",
-      "height": 174
+      "style": "ruled"
     },
     {
       "slug": "wallpads",
       "title": "WALLPADS",
       "url": "https://github.com/nuclyee72/Wallpads",
       "cover": "#573c27",
-      "style": "banded",
-      "height": 162
+      "style": "banded"
     }
   ]
 }
