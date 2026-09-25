@@ -1,5 +1,5 @@
 {
-  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 블록을 갱신한다. url 없는 항목 = 예비 책(제목·링크 없음). 새 사이트 생기면 그 항목에 title·url·style 채우고 다시 실행.",
+  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 블록을 갱신한다. url 없는 항목 = 예비 책(제목·링크 없음). { slug, gap: 폭 } 항목 = 책 없는 빈 칸(묶음 사이 띄우기). 새 사이트 생기면 항목에 title·url·style 채우고 다시 실행.",
   "render": {
     "caseWidth": 900,
     "titleDirection": "down",
@@ -7,20 +7,40 @@
   },
   "books": [
     {
+      "slug": "projectdaily",
+      "title": "PROJECT DAILY",
+      "url": "https://nuclyee72.github.io/ProjectDaily/",
+      "cover": "#5a3826",
+      "style": "label",
+      "height": 176
+    },
+    {
       "slug": "dailysudoku",
       "title": "DAILY SUDOKU",
       "url": "https://nuclyee72.github.io/DailySudoku/",
       "cover": "#4a3122",
       "style": "banded",
-      "height": 190
+      "height": 166
     },
     {
-      "slug": "gagedo",
-      "title": "GAGEDO",
-      "url": "https://nuclyee72.github.io/Gagedo/",
-      "cover": "#5a3826",
-      "style": "label",
-      "height": 156
+      "slug": "dailytrilateral",
+      "title": "DAILY TRILATERAL",
+      "url": "https://nuclyee72.github.io/DailyTrilateral/",
+      "cover": "#2f2318",
+      "style": "plain",
+      "height": 172
+    },
+    {
+      "slug": "dailywordship",
+      "title": "DAILY WORDSHIP",
+      "url": "https://nuclyee72.github.io/DailyWordship/",
+      "cover": "#43301f",
+      "style": "ruled",
+      "height": 160
+    },
+    {
+      "slug": "gap-1",
+      "gap": 26
     },
     {
       "slug": "mahjongrating",
@@ -31,15 +51,12 @@
       "height": 174
     },
     {
-      "slug": "dailytrilateral",
-      "title": "DAILY TRILATERAL",
-      "url": "https://nuclyee72.github.io/DailyTrilateral/",
-      "cover": "#2f2318",
-      "style": "plain",
-      "height": 182
-    },
-    { "slug": "spare-2", "cover": "#5a3826", "height": 150 },
-    { "slug": "spare-3", "cover": "#3a2a1c", "height": 190 },
-    { "slug": "spare-4", "cover": "#43301f", "height": 138 }
+      "slug": "wallpads",
+      "title": "WALLPADS",
+      "url": "https://github.com/nuclyee72/Wallpads",
+      "cover": "#573c27",
+      "style": "banded",
+      "height": 162
+    }
   ]
 }

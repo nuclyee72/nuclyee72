@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // books.config.json -> assets/books/<slug>.svg  +  assets/books/_props.svg  +  README books 블록
 //
-// 가로로 긴 붙박이 책장 칸 하나. 왼쪽부터 책 3권(각각 클릭 링크), 오른쪽 남는 칸에 가스등·플라스크·유리병.
+// 가로로 긴 붙박이 책장 칸 하나. 왼쪽부터 책들(각각 클릭 링크, { gap } 항목은 빈 칸), 오른쪽 남는 칸에 가스등·플라스크·유리병.
 // 각 조각 SVG 의 틀(위 가로대·아래 선반·안쪽 배경)이 좌우로 이어져 하나의 케이스가 된다.
 // 무의존성.  실행:  node tools/build-books.mjs
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
@@ -297,12 +297,15 @@ function propsTile(propsW) {
 }
 
 // --- 책 타일 ---
+// gap 항목 = 책 없이 비워 두는 칸 (책 묶음 사이 띄우기)
+const tileInnerW = b => (b.gap != null ? b.gap : INNER_W);
+
 function bookTile(book, i, isFirst) {
   const seed = hash(book.slug);
   const PL = isFirst ? SIDE_W : 0;
-  const TW = INNER_W + PL;
+  const TW = tileInnerW(book) + PL;
   const L = -BL, Rr = TW + BL;
-  const label = book.url ? esc(book.title || book.slug) : '예비 책';
+  const label = book.gap != null ? '빈 칸' : book.url ? esc(book.title || book.slug) : '예비 책';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TW} ${VB_H}" width="${TW}" height="${VB_H}" role="img" aria-label="${label}">
   <defs>
     ${wig('jf', seed, 3, 0.022, 0.44)}
@@ -315,9 +318,9 @@ function bookTile(book, i, isFirst) {
     </linearGradient>
   </defs>
   <g filter="url(#jf)">${recess(L, Rr)}</g>
-  <g filter="url(#jb)">
+  ${book.gap != null ? '' : `<g filter="url(#jb)">
     ${bookArt(book, i, PL)}
-  </g>
+  </g>`}
   <g filter="url(#jf)">
     ${frame(L, Rr, TW, { left: isFirst })}
   </g>
@@ -331,13 +334,13 @@ for (const f of ['_shelf.svg', '_props.svg']) if (existsSync(join(OUT, f))) rmSy
 
 books.forEach((b, i) => writeFileSync(join(OUT, `${b.slug}.svg`), bookTile(b, i, i === 0)));
 
-const booksW = SIDE_W + books.length * INNER_W;
+const booksW = SIDE_W + books.reduce((a, b) => a + tileInnerW(b), 0);
 const propsW = Math.max(200, CASE_W - booksW - SIDE_W);
 writeFileSync(join(OUT, '_props.svg'), propsTile(propsW));
 
 // 각 조각을 폭 % 로 붙여 한 줄 유지 → 화면 좁아지면 줄바꿈 대신 통째로 축소.
 // 합계가 scene(width 100%) 과 같아지도록 total = 케이스 전체 폭.
-const tiles = books.map((b, i) => ({ href: b.url, src: `assets/books/${b.slug}.svg`, tw: (i === 0 ? SIDE_W : 0) + INNER_W }));
+const tiles = books.map((b, i) => ({ href: b.url, src: `assets/books/${b.slug}.svg`, tw: (i === 0 ? SIDE_W : 0) + tileInnerW(b) }));
 tiles.push({ src: 'assets/books/_props.svg', tw: propsW + SIDE_W });
 const total = tiles.reduce((a, t) => a + t.tw, 0);
 const rows = tiles.map(t => {
