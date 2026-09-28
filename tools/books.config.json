@@ -8,13 +8,6 @@
   },
   "books": [
     {
-      "slug": "dailybwsweeper",
-      "title": "DAILY BWSWEEPER",
-      "url": "https://nuclyee72.github.io/ProjectDaily/#bwsweeper",
-      "cover": "#3d2a1c",
-      "style": "ruled"
-    },
-    {
       "slug": "projectdaily",
       "title": "PROJECT DAILY",
       "url": "https://nuclyee72.github.io/ProjectDaily/#sudoku",
@@ -41,6 +34,13 @@
       "url": "https://nuclyee72.github.io/DailyWordship/",
       "cover": "#43301f",
       "style": "ruled"
+    },
+    {
+      "slug": "dailybwsweeper",
+      "title": "DAILY BWSWEEPER",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#bwsweeper",
+      "cover": "#3d2a1c",
+      "style": "label"
     },
     {
       "slug": "gap-1",
