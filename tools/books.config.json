@@ -8,23 +8,30 @@
   },
   "books": [
     {
+      "slug": "dailybwsweeper",
+      "title": "DAILY BWSWEEPER",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#bwsweeper",
+      "cover": "#3d2a1c",
+      "style": "ruled"
+    },
+    {
       "slug": "projectdaily",
       "title": "PROJECT DAILY",
-      "url": "https://nuclyee72.github.io/ProjectDaily/",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#sudoku",
       "cover": "#5a3826",
       "style": "label"
     },
     {
       "slug": "dailysudoku",
       "title": "DAILY SUDOKU",
-      "url": "https://nuclyee72.github.io/DailySudoku/",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#sudoku",
       "cover": "#4a3122",
       "style": "banded"
     },
     {
       "slug": "dailytrilateral",
       "title": "DAILY TRILATERAL",
-      "url": "https://nuclyee72.github.io/DailyTrilateral/",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#trilateral",
       "cover": "#2f2318",
       "style": "plain"
     },

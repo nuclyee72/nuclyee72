@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 222" width="65" height="222" role="img" aria-label="DAILY BWSWEEPER">
+  <defs>
+    <filter id="jf" x="-28%" y="-14%" width="156%" height="128%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="8" result="n">
+        <animate attributeName="seed" values="8;-1;-6;-15" dur="0.44s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="jb" x="-28%" y="-14%" width="156%" height="128%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.028" numOctaves="2" seed="-3" result="n">
+        <animate attributeName="seed" values="-3;-10;-4;1" dur="0.42s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <linearGradient id="lit" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.09"/>
+      <stop offset="0.16" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.82" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.32"/>
+    </linearGradient>
+  </defs>
+  <g filter="url(#jf)"><rect x="-12" y="4" width="89" height="210" fill="#1d120b"/>
+    <rect x="-12" y="4" width="89" height="13" fill="#000000" opacity="0.4"/>
+    <rect x="-12" y="198" width="89" height="16" fill="#000000" opacity="0.28"/></g>
+  <g filter="url(#jb)">
+    <g transform="rotate(0.22 39 196)">
+    <rect x="16" y="24" width="46" height="172" rx="2" fill="#3d2a1c" stroke="#160d08" stroke-width="1.4"/>
+    <rect x="16" y="24" width="46" height="172" rx="2" fill="url(#lit)"/>
+    <rect x="16" y="24" width="46" height="2.6" fill="#000000" opacity="0.32"/>
+    <rect x="21" y="54.96" width="36" height="89.44" fill="none" stroke="#caa63a" stroke-width="1" opacity="0.8"/>
+    <rect x="15" y="36" width="48" height="4" fill="#000000" opacity="0.28"/><rect x="15" y="36" width="48" height="1.1" fill="#ffffff" opacity="0.11"/>
+    <text transform="translate(44.9 102.62) rotate(90)" text-anchor="middle" dominant-baseline="central"
+      font-family="Georgia,'Times New Roman','Nanum Myeongjo',serif" font-weight="600" font-size="9.79" letter-spacing="0.5" fill="#e8c88a">DAILY</text>
+    <text transform="translate(33.1 102.62) rotate(90)" text-anchor="middle" dominant-baseline="central"
+      font-family="Georgia,'Times New Roman','Nanum Myeongjo',serif" font-weight="600" font-size="9.79" letter-spacing="0.5" fill="#e8c88a">BWSWEEPER</text>
+    <path d="M23.03 32 V188" stroke="#000000" stroke-width="0.7" opacity="0.12" fill="none"/>
+  </g>
+  </g>
+  <g filter="url(#jf)">
+    <rect x="-12" y="4" width="89" height="13" fill="#2c1c0f"/>
+    <rect x="-12" y="4" width="89" height="2.4" fill="#4a3422" opacity="0.5"/>
+    <rect x="-12" y="14" width="89" height="3" fill="#000000" opacity="0.28"/>
+    <path d="M-12 16.5 H77" stroke="#0c0603" stroke-width="1.3" opacity="0.7"/>
+    <path d="M-12 214 H77 L62 219 H3 Z" fill="#140b06" opacity="0.32"/>
+    <rect x="-12" y="196" width="89" height="18" fill="#2c1c0f"/>
+    <rect x="-12" y="196" width="89" height="2.6" fill="#4a3422" opacity="0.6"/>
+    <rect x="-12" y="209" width="89" height="4" fill="#000000" opacity="0.24"/>
+    <path d="M-12 213.5 H77" stroke="#0c0603" stroke-width="1.6" opacity="0.75"/>
+    <rect x="-12" y="4" width="25" height="210" fill="#22150e"/>
+    <rect x="-12" y="4" width="2.6" height="210" fill="#4a3422" opacity="0.4"/>
+    <rect x="-0.6" y="4" width="2" height="210" fill="#000000" opacity="0.32"/>
+  </g>
+</svg>
