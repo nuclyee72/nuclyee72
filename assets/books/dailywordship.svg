@@ -27,7 +27,7 @@
     <rect x="3" y="24" width="46" height="172" rx="2" fill="#43301f" stroke="#160d08" stroke-width="1.4"/>
     <rect x="3" y="24" width="46" height="172" rx="2" fill="url(#lit)"/>
     <rect x="3" y="24" width="46" height="2.6" fill="#000000" opacity="0.32"/>
-    <rect x="8" y="54.96" width="36" height="89.44" fill="none" stroke="#caa63a" stroke-width="1" opacity="0.8"/>
+    <rect x="8" y="54.24" width="36" height="90.88" fill="none" stroke="#caa63a" stroke-width="1" opacity="0.8"/>
     <rect x="2" y="36" width="48" height="4" fill="#000000" opacity="0.28"/><rect x="2" y="36" width="48" height="1.1" fill="#ffffff" opacity="0.11"/>
     <text transform="translate(32.25 102.83) rotate(90)" text-anchor="middle" dominant-baseline="central"
       font-family="Georgia,'Times New Roman','Nanum Myeongjo',serif" font-weight="600" font-size="10.5" letter-spacing="0.5" fill="#e8c88a">DAILY</text>

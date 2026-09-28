@@ -88,11 +88,11 @@ function titleText(title, cx, mid, run, fs0) {
       ${font} font-size="${n(fs)}" letter-spacing="0.5" fill="${fill}">${esc(w)}</text>`;
   const fill = GOLD;
   if (words.length < 2 || title.length < 8) {
-    const fs = clamp(fs0 ?? (run - 10) / (title.length * 0.72), 6.5, 10);
+    const fs = fs0 ?? clamp((run - 10) / (title.length * 0.72), 6.5, 10);
     return line(title, fs, 0, fill);
   }
   const maxLen = Math.max(...words.map(w => w.length));
-  const fs = clamp(fs0 ?? (run - 12) / (maxLen * 0.72), 6.5, 10.5);
+  const fs = fs0 ?? clamp((run - 12) / (maxLen * 0.72), 6.5, 10.5);
   const gap = fs + 2;
   const spread = (words.length - 1) * gap;
   return words.map((w, i) => line(w, fs, n(spread / 2 - i * gap), fill)).join('\n    ');
@@ -111,6 +111,8 @@ function bookArt(book, i, x0) {
   const cx = bx + BOOK_W / 2;
   const tilt = book.tilt ?? (spare ? 0 : n(rand() * 1.4 - 0.7, 2));
   const run = H - 24;                         // 제목이 쓰일 세로 길이
+  const fs = book.titleSize ?? R.titleSize;   // 제목 글자 크기 (render.titleSize 로 전부 통일)
+  const need = fs ? Math.max(...title.split(/\s+/).map(w => w.length)) * fs * 0.82 + 18 : 0;   // 긴 제목이면 라벨·테두리를 그만큼 늘림
 
   const g = [];
   g.push(`<rect x="${n(bx)}" y="${n(y0)}" width="${BOOK_W}" height="${n(H)}" rx="2" fill="${cover}" stroke="#160d08" stroke-width="1.4"/>`);
@@ -125,20 +127,20 @@ function bookArt(book, i, x0) {
   } else if (style === 'banded') {
     const ys = [y0 + 16, y0 + H * 0.5, y0 + H - 18];
     g.push(ys.map(band).join(''));
-    g.push(titleText(title, cx, y0 + H * 0.5, H * 0.5 - 22));
+    g.push(titleText(title, cx, y0 + H * 0.5, H * 0.5 - 22, fs));
   } else if (style === 'label') {
-    const lh = clamp(H * 0.5, 70, 108), ly = y0 + H * 0.42;
+    const lh = clamp(Math.max(H * 0.5, need), 70, 108), ly = y0 + H * 0.42;
     g.push(`<rect x="${n(bx + 5)}" y="${n(ly - lh / 2)}" width="${BOOK_W - 10}" height="${n(lh)}" rx="1" fill="${CREAM}" opacity="0.9" stroke="#5a4a30" stroke-width="0.8"/>`);
     g.push(band(y0 + H - 16));
-    g.push(titleText(title, cx, ly, lh - 12).replaceAll(GOLD, '#2c2016'));
+    g.push(titleText(title, cx, ly, lh - 12, fs).replaceAll(GOLD, '#2c2016'));
   } else if (style === 'ruled') {
-    const ph = clamp(H * 0.52, 74, 116), py = y0 + H * 0.44;
+    const ph = clamp(Math.max(H * 0.52, need + 4), 74, 116), py = y0 + H * 0.44;
     g.push(`<rect x="${n(bx + 5)}" y="${n(py - ph / 2)}" width="${BOOK_W - 10}" height="${n(ph)}" fill="none" stroke="${book.accent || '#caa63a'}" stroke-width="1" opacity="0.8"/>`);
     g.push(band(y0 + 14));
-    g.push(titleText(title, cx, py, ph - 14));
+    g.push(titleText(title, cx, py, ph - 14, fs));
   } else { // plain
     g.push(`<path d="M${n(bx + 4)} ${n(y0 + 12)} h${BOOK_W - 8} M${n(bx + 4)} ${n(SHELF_TOP - 12)} h${BOOK_W - 8}" stroke="${GOLD}" stroke-width="0.8" opacity="0.5"/>`);
-    g.push(titleText(title, cx, y0 + H * 0.5, H - 40));
+    g.push(titleText(title, cx, y0 + H * 0.5, H - 40, fs));
   }
   // 낡은 결 한 줄
   g.push(`<path d="M${n(bx + 6 + rand() * 30)} ${n(y0 + 8)} V${n(SHELF_TOP - 8)}" stroke="#000000" stroke-width="0.7" opacity="0.12" fill="none"/>`);

@@ -4,7 +4,8 @@
     "caseWidth": 900,
     "titleDirection": "down",
     "caption": "",
-    "bookHeight": 172
+    "bookHeight": 172,
+    "titleSize": 10.5
   },
   "books": [
     {
