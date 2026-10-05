@@ -1,5 +1,5 @@
 {
-  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 블록을 갱신한다. url 없는 항목 = 예비 책(제목·링크 없음). { slug, gap: 폭 } 항목 = 책 없는 빈 칸(묶음 사이 띄우기). 새 사이트 생기면 항목에 title·url·style 채우고 다시 실행.",
+  "_note": "책등 생성 설정. build-books.mjs 가 이 파일을 읽어 assets/books/*.svg 와 README 블록을 갱신한다. url 없는 항목 = 예비 책(제목·링크 없음). { slug, gap: 폭 } 항목 = 책 없는 빈 칸(묶음 사이 띄우기). { props: true } 항목 = 소품(항아리·병·가스등) 칸 자리, 그 뒤 책들은 책장 오른쪽 끝에 꽂힘. 새 사이트 생기면 항목에 title·url·style 채우고 다시 실행.",
   "render": {
     "caseWidth": 900,
     "titleDirection": "down",
@@ -60,6 +60,23 @@
       "url": "https://github.com/nuclyee72/Wallpads",
       "cover": "#573c27",
       "style": "banded"
+    },
+    {
+      "props": true
+    },
+    {
+      "slug": "gagedo",
+      "title": "GAGEDO",
+      "url": "https://nuclyee72.github.io/Gagedo/",
+      "cover": "#5a3524",
+      "style": "plain"
+    },
+    {
+      "slug": "pptsimulator",
+      "title": "PPT SIMULATOR",
+      "url": "https://nuclyee72.github.io/PPTSimulator/",
+      "cover": "#38291b",
+      "style": "label"
     }
   ]
 }

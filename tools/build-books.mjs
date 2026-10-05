@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // books.config.json -> assets/books/<slug>.svg  +  assets/books/_props.svg  +  README books 블록
 //
-// 가로로 긴 붙박이 책장 칸 하나. 왼쪽부터 책들(각각 클릭 링크, { gap } 항목은 빈 칸), 오른쪽 남는 칸에 가스등·플라스크·유리병.
+// 가로로 긴 붙박이 책장 칸 하나. 왼쪽부터 책들(각각 클릭 링크, { gap } 항목은 빈 칸), 남는 칸에 가스등·플라스크·유리병.
+// 소품 칸은 { props: true } 항목 자리에 들어간다 (없으면 맨 오른쪽). 그 뒤 항목들은 소품 칸 오른쪽에 꽂힌다.
 // 각 조각 SVG 의 틀(위 가로대·아래 선반·안쪽 배경)이 좌우로 이어져 하나의 케이스가 된다.
 // 무의존성.  실행:  node tools/build-books.mjs
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from 'node:fs';
@@ -233,8 +234,8 @@ function candlestick(x, y) {
     </g>`;
 }
 // 예비 책 (제목 없는 갈색 책등, 나중에 사이트 추가용 자리)
-function propsTile(propsW) {
-  const TW = propsW + SIDE_W;
+function propsTile(propsW, isLast) {
+  const TW = propsW + (isLast ? SIDE_W : 0);
   const L = -BL, Rr = TW + BL;
   const seed = hash('props');
   const y = SHELF_TOP - 2;
@@ -251,9 +252,9 @@ function propsTile(propsW) {
   ];
   const margin = 10;
   const gapAt = i => [26, 16, 30, 16, 28, 16][i] ?? 22;
-  // 소품을 왼쪽부터 고정 간격으로 붙이고, 남는 폭이 부족하면 뒤쪽 유리병부터 버린다
+  // 소품을 왼쪽부터 고정 간격으로 붙이고, 가스등 자리(76)까지 모자라면 뒤쪽 유리병부터 버린다
   const span = s => s.reduce((a, x, i) => a + x[1] + (i < s.length - 1 ? gapAt(i) : 0), 0);
-  while (seq.length > 2 && span(seq) > propsW - margin * 2) seq.pop();
+  while (seq.length > 2 && span(seq) > propsW - margin - 76) seq.pop();
   let cur = margin;
   const packed = seq.map(([fn, w], i) => {
     const cx = cur + w / 2;
@@ -292,7 +293,7 @@ function propsTile(propsW) {
     ${objs}
   </g>
   <g filter="url(#jf)">
-    ${frame(L, Rr, TW, { right: true })}
+    ${frame(L, Rr, TW, { right: isLast })}
   </g>
 </svg>
 `;
@@ -302,10 +303,10 @@ function propsTile(propsW) {
 // gap 항목 = 책 없이 비워 두는 칸 (책 묶음 사이 띄우기)
 const tileInnerW = b => (b.gap != null ? b.gap : INNER_W);
 
-function bookTile(book, i, isFirst) {
+function bookTile(book, i, isFirst, isLast) {
   const seed = hash(book.slug);
   const PL = isFirst ? SIDE_W : 0;
-  const TW = tileInnerW(book) + PL;
+  const TW = PL + tileInnerW(book) + (isLast ? SIDE_W : 0);
   const L = -BL, Rr = TW + BL;
   const label = book.gap != null ? '빈 칸' : book.url ? esc(book.title || book.slug) : '예비 책';
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${TW} ${VB_H}" width="${TW}" height="${VB_H}" role="img" aria-label="${label}">
@@ -324,26 +325,33 @@ function bookTile(book, i, isFirst) {
     ${bookArt(book, i, PL)}
   </g>`}
   <g filter="url(#jf)">
-    ${frame(L, Rr, TW, { left: isFirst })}
+    ${frame(L, Rr, TW, { left: isFirst, right: isLast })}
   </g>
 </svg>
 `;
 }
 
 // --- 실행 ---
-const books = cfg.books ?? [];
+const isProps = b => b.props === true;
+const entries = cfg.books ?? [];
+const order = entries.some(isProps) ? entries : [...entries, { props: true }];
+const books = order.filter(b => !isProps(b));
 for (const f of ['_shelf.svg', '_props.svg']) if (existsSync(join(OUT, f))) rmSync(join(OUT, f));
-
-books.forEach((b, i) => writeFileSync(join(OUT, `${b.slug}.svg`), bookTile(b, i, i === 0)));
 
 const booksW = SIDE_W + books.reduce((a, b) => a + tileInnerW(b), 0);
 const propsW = Math.max(200, CASE_W - booksW - SIDE_W);
-writeFileSync(join(OUT, '_props.svg'), propsTile(propsW));
 
 // 각 조각을 폭 % 로 붙여 한 줄 유지 → 화면 좁아지면 줄바꿈 대신 통째로 축소.
 // 합계가 scene(width 100%) 과 같아지도록 total = 케이스 전체 폭.
-const tiles = books.map((b, i) => ({ href: b.url, src: `assets/books/${b.slug}.svg`, tw: (i === 0 ? SIDE_W : 0) + tileInnerW(b) }));
-tiles.push({ src: 'assets/books/_props.svg', tw: propsW + SIDE_W });
+const last = order.length - 1;
+const tiles = order.map((b, i) => {
+  if (isProps(b)) {
+    writeFileSync(join(OUT, '_props.svg'), propsTile(propsW, i === last));
+    return { src: 'assets/books/_props.svg', tw: propsW + (i === last ? SIDE_W : 0) };
+  }
+  writeFileSync(join(OUT, `${b.slug}.svg`), bookTile(b, books.indexOf(b), i === 0, i === last));
+  return { href: b.url, src: `assets/books/${b.slug}.svg`, tw: (i === 0 ? SIDE_W : 0) + tileInnerW(b) + (i === last ? SIDE_W : 0) };
+});
 const total = tiles.reduce((a, t) => a + t.tw, 0);
 const rows = tiles.map(t => {
   const img = `<img src="${t.src}" width="${n(t.tw / total * 99.8, 3)}%">`;
