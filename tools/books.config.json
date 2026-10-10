@@ -44,6 +44,13 @@
       "style": "label"
     },
     {
+      "slug": "dailyfarm",
+      "title": "DAILY FARM",
+      "url": "https://nuclyee72.github.io/ProjectDaily/#farm",
+      "cover": "#4e3622",
+      "style": "banded"
+    },
+    {
       "slug": "gap-1",
       "gap": 26
     },
@@ -77,6 +84,13 @@
       "url": "https://nuclyee72.github.io/PPTSimulator/",
       "cover": "#38291b",
       "style": "label"
+    },
+    {
+      "slug": "watermelon2048",
+      "title": "WATERMELON 2048",
+      "url": "https://github.com/nuclyee72/WMGame",
+      "cover": "#40291c",
+      "style": "ruled"
     }
   ]
 }
