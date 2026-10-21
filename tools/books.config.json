@@ -72,13 +72,6 @@
       "style": "ruled"
     },
     {
-      "slug": "bwflags",
-      "title": "BW FLAGS",
-      "url": "https://nuclyee72.github.io/BWFlags/",
-      "cover": "#573c27",
-      "style": "banded"
-    },
-    {
       "props": true
     },
     {
@@ -101,6 +94,13 @@
       "url": "https://nuclyee72.github.io/WMGame/",
       "cover": "#40291c",
       "style": "ruled"
+    },
+    {
+      "slug": "bwflags",
+      "title": "BW FLAGS",
+      "url": "https://nuclyee72.github.io/BWFlags/",
+      "cover": "#573c27",
+      "style": "banded"
     }
   ]
 }
