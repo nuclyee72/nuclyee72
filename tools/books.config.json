@@ -20,35 +20,45 @@
       "title": "DAILY SUDOKU",
       "url": "https://nuclyee72.github.io/ProjectDaily/#sudoku",
       "cover": "#4a3122",
-      "style": "banded"
+      "style": "banded",
+      "height": 140,
+      "tilt": 0
     },
     {
       "slug": "dailytrilateral",
       "title": "DAILY TRILATERAL",
       "url": "https://nuclyee72.github.io/ProjectDaily/#trilateral",
       "cover": "#2f2318",
-      "style": "plain"
+      "style": "plain",
+      "height": 140,
+      "tilt": 0
     },
     {
       "slug": "dailywordship",
       "title": "DAILY WORDSHIP",
       "url": "https://nuclyee72.github.io/DailyWordship/",
       "cover": "#43301f",
-      "style": "ruled"
+      "style": "ruled",
+      "height": 140,
+      "tilt": 0
     },
     {
       "slug": "dailybwsweeper",
       "title": "DAILY BWSWEEPER",
       "url": "https://nuclyee72.github.io/ProjectDaily/#bwsweeper",
       "cover": "#3d2a1c",
-      "style": "label"
+      "style": "label",
+      "height": 140,
+      "tilt": 0
     },
     {
       "slug": "dailyfarm",
       "title": "DAILY FARM",
       "url": "https://nuclyee72.github.io/ProjectDaily/#farm",
       "cover": "#4e3622",
-      "style": "banded"
+      "style": "banded",
+      "height": 140,
+      "tilt": 0
     },
     {
       "slug": "gap-1",
@@ -62,9 +72,9 @@
       "style": "ruled"
     },
     {
-      "slug": "wallpads",
-      "title": "WALLPADS",
-      "url": "https://github.com/nuclyee72/Wallpads",
+      "slug": "bwflags",
+      "title": "BW FLAGS",
+      "url": "https://nuclyee72.github.io/BWFlags/",
       "cover": "#573c27",
       "style": "banded"
     },
@@ -88,7 +98,7 @@
     {
       "slug": "watermelon2048",
       "title": "WATERMELON 2048",
-      "url": "https://github.com/nuclyee72/WMGame",
+      "url": "https://nuclyee72.github.io/WMGame/",
       "cover": "#40291c",
       "style": "ruled"
     }
